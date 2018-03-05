@@ -1,0 +1,37 @@
+apply from: '../java-common.gradle'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+dependencies {
+    compile project(':fl4j-api')
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+
+    //testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+    //testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+    //testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+}
+
+task genlogimpl {
+    genlogimpl('org.fl4j.logback.InfoLog', 'Info', 'debug', 'trace', 'warn', 'error')
+}
+
+def genlogimpl(String template, String templateLevel, String ... levels) {
+    File srcRoot = sourceSets.getByName('main').getJava().srcDirs[0]
+    File tf = new File(srcRoot, template.replace('.', '/') + ".java")
+    String templateText = tf.getText('UTF-8')
+    for (String level : levels) {
+        String resultText = templateText
+                .replace(templateLevel.toLowerCase(), level.toLowerCase())
+                .replace(templateLevel.toUpperCase(), level.toUpperCase())
+                .replace(capitalize(templateLevel), capitalize(level))
+        String rfName = (template.replace('.', '/') + ".java").replace(capitalize(templateLevel), capitalize(level))
+        File rf = new File(srcRoot, rfName)
+        rf.setText(resultText, 'UTF-8')
+    }
+}
+
+def capitalize(String s) {
+    return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase()
+}
+
+

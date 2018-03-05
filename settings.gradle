@@ -1,0 +1,9 @@
+rootProject.name = 'fl4j'
+
+include 'fl4j-api'
+include 'fl4j-logback'
+include 'fl4j-juli'
+include 'fl4j-log4j'
+include 'fl4j-log4j2'
+include 'fl4j-demo'
+
