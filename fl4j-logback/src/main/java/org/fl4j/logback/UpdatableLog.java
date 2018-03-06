@@ -28,7 +28,7 @@ public class UpdatableLog implements Log, LoggerContextListener {
         logLevels.put(LogLevel.NONE, Level.OFF);
         logLevels.put(LogLevel.FATAL, Level.ERROR);
         logLevels.put(LogLevel.ERROR, Level.ERROR);
-        logLevels.put(LogLevel.WARINIG, Level.WARN);
+        logLevels.put(LogLevel.WARNING, Level.WARN);
         logLevels.put(LogLevel.INFO, Level.INFO);
         logLevels.put(LogLevel.DEBUG, Level.DEBUG);
         logLevels.put(LogLevel.TRACE, Level.TRACE);
@@ -47,7 +47,7 @@ public class UpdatableLog implements Log, LoggerContextListener {
         logFactories.put(LogLevel.INFO, InfoLog::new);
         logFactories.put(LogLevel.DEBUG, DebugLog::new);
         logFactories.put(LogLevel.TRACE, TraceLog::new);
-        logFactories.put(LogLevel.WARINIG, WarnLog::new);
+        logFactories.put(LogLevel.WARNING, WarnLog::new);
         logFactories.put(LogLevel.ERROR, ErrorLog::new);
         logFactories.put(LogLevel.FATAL, ErrorLog::new);
     }

@@ -6,4 +6,4 @@ include 'fl4j-juli'
 include 'fl4j-log4j'
 include 'fl4j-log4j2'
 include 'fl4j-demo'
-
+include 'fl4s'

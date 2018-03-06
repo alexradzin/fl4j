@@ -1,0 +1,9 @@
+apply plugin: 'scala'
+
+dependencies {
+    compileOnly("org.scala-lang:scala-library:2.11.8")
+    compile project(':fl4j-api')
+
+    testCompile("org.scala-lang:scala-library:2.11.8")
+    testCompile "org.scalamock:scalamock-scalatest-support_2.11:3.4.2"
+}

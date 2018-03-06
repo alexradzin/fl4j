@@ -17,7 +17,7 @@ public class Log4jProvider extends ClassAvailabilityCheckingLogProvider {
         logLevelMapping.put(LogLevel.INFO, Level.INFO);
         logLevelMapping.put(LogLevel.DEBUG, Level.DEBUG);
         logLevelMapping.put(LogLevel.TRACE, Level.TRACE);
-        logLevelMapping.put(LogLevel.WARINIG, Level.WARN);
+        logLevelMapping.put(LogLevel.WARNING, Level.WARN);
         logLevelMapping.put(LogLevel.ERROR, Level.ERROR);
         logLevelMapping.put(LogLevel.FATAL, Level.FATAL);
     }

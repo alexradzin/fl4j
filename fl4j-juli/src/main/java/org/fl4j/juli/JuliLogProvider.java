@@ -5,7 +5,6 @@ import org.fl4j.*;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
@@ -18,7 +17,7 @@ public class JuliLogProvider implements LogProvider {
         logLevelMapping.put(LogLevel.INFO, Level.INFO);
         logLevelMapping.put(LogLevel.DEBUG, Level.FINE);
         logLevelMapping.put(LogLevel.TRACE, Level.FINER);
-        logLevelMapping.put(LogLevel.WARINIG, Level.WARNING);
+        logLevelMapping.put(LogLevel.WARNING, Level.WARNING);
         logLevelMapping.put(LogLevel.ERROR, Level.SEVERE);
         logLevelMapping.put(LogLevel.FATAL, Level.SEVERE);
     }
