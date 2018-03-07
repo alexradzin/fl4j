@@ -30,4 +30,9 @@ public class LogBackProvider extends ClassAvailabilityCheckingLogProvider {
     public Log create(LogBuilder builder) {
         return new UpdatableLog(defaultLoggerContext, builder.getLogName(), builder.getLogLevel());
     }
+
+    @Override
+    public int getPriority() {
+        return 10;
+    }
 }

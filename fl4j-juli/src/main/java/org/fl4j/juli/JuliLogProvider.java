@@ -39,4 +39,9 @@ public class JuliLogProvider implements LogProvider {
     public boolean isAvailable() {
         return true;
     }
+
+    @Override
+    public int getPriority() {
+        return 40;
+    }
 }

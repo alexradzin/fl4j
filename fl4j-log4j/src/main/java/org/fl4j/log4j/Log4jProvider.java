@@ -32,4 +32,10 @@ public class Log4jProvider extends ClassAvailabilityCheckingLogProvider {
         logger.setLevel(logLevelMapping.getOrDefault(builder.getLogLevel(), Level.INFO));
         return new Log4jAdapter(logger);
     }
+
+    @Override
+    public int getPriority() {
+        return 30;
+    }
+
 }

@@ -1,8 +1,8 @@
 package org.fl4s
 
 import org.fl4s.simple.Logging
-import org.scalatest.{BeforeAndAfter, FlatSpec, FunSuite, Matchers}
 import org.scalamock.scalatest.MockFactory
+import org.scalatest.{FunSuite, Matchers}
 
 /**
   * Created by alexander on 3/6/18.

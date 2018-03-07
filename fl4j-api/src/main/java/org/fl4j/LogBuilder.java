@@ -2,7 +2,6 @@ package org.fl4j;
 
 
 import java.util.*;
-import java.util.stream.StreamSupport;
 
 import static java.lang.Thread.currentThread;
 
@@ -75,10 +74,21 @@ public class LogBuilder {
                     System.err.printf("Log Provider %s is not found%n", configuredProvider);
                 }
             }
-            // TODO implement priorities
             if (!providers.isEmpty()) {
-                provider = providers.get(0);
+                provider = Collections.min(providers, new Comparator<LogProvider>() {
+                    @Override
+                    public int compare(LogProvider p1, LogProvider p2) {
+                        return p1.getPriority() - p2.getPriority();
+                    }
+                });
+
+                if (provider instanceof EmptyLogProvider) {
+                    System.out.println("No log provider is found");
+                }
+
                 return provider;
+            } else {
+                System.out.println("No log provider is found");
             }
         }
         return provider;

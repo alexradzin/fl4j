@@ -17,4 +17,9 @@ public class Log4j2Provider extends ClassAvailabilityCheckingLogProvider {
     public Log create(LogBuilder builder) {
         return new Log4j2Adapter(LogManager.getLogger(builder.getLogName()));
     }
+
+    @Override
+    public int getPriority() {
+        return 20;
+    }
 }
