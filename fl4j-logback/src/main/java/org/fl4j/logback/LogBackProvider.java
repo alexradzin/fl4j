@@ -8,6 +8,7 @@ import org.fl4j.Log;
 import org.fl4j.LogBuilder;
 
 /**
+ * Implementation of {@link org.fl4j.LogProvider} Logback
  * Created by alexander on 2/5/18.
  */
 public class LogBackProvider extends ClassAvailabilityCheckingLogProvider {

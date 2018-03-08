@@ -18,7 +18,7 @@ public class Applier {
     public static <T, R> R apply(Function<T, R> f, T arg) {
         if (arg == null) {
             try {
-                return f.apply(arg);
+                return f.apply(null);
             } catch (NullPointerException e) {
                 return null;
             }

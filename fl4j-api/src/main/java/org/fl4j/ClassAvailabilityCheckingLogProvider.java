@@ -1,6 +1,8 @@
 package org.fl4j;
 
 /**
+ * Convenient base class for {@link LogProvider} implementations that check implementation availability
+ * by checking availability of one of the key classes.
  * Created by alexander on 3/5/18.
  */
 public abstract class ClassAvailabilityCheckingLogProvider implements LogProvider {

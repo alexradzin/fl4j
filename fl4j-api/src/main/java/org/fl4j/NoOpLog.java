@@ -4,6 +4,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
+ * Empty implementation of {@link Log} that is used for disabled logs (logs with level higher than enabled in current environment)
  * Created by alexander on 2/4/18.
  */
 public class NoOpLog implements Log {

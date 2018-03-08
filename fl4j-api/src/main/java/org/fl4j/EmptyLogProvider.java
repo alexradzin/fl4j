@@ -1,6 +1,7 @@
 package org.fl4j;
 
 /**
+ * Empty implementation of {@link LogProvider}. Used as a fallback when no other implementations are available.
  * Created by alexander on 3/6/18.
  */
 public class EmptyLogProvider implements LogProvider {

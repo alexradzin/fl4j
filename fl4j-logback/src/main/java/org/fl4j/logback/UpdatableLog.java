@@ -15,10 +15,10 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
+ * Implementation of {@link Log} that wraps real {@link Log} and updates it when configuration is being updated dynamically.
  * Created by alexander on 2/5/18.
  */
 public class UpdatableLog implements Log, LoggerContextListener {
-    private final LoggerContext loggerContext;
     private final Logger logger;
     private volatile Log log;
 
@@ -53,7 +53,6 @@ public class UpdatableLog implements Log, LoggerContextListener {
     }
 
     UpdatableLog(LoggerContext loggerContext, String name, LogLevel initialLevel) {
-        this.loggerContext = loggerContext;
         loggerContext.addListener(this);
         logger = loggerContext.getLogger(name);
         log = createLog(logger.isEnabledFor(logLevels.get(initialLevel)) ? initialLevel: LogLevel.NONE, logger);

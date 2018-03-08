@@ -7,7 +7,7 @@ import static org.fl4j.Applier.apply;
 import static org.fl4j.Getter.get;
 
 /**
- * Base class for adaptor of {@link Log} for any other logger
+ * Base class for adaptor of {@link Log} for any other logger that does not support log formats.
  * Created by alexander on 2/12/18.
  */
 public abstract class LoggerAdapterBase implements Log {
@@ -16,6 +16,7 @@ public abstract class LoggerAdapterBase implements Log {
     private static final Object[] EMPTY = new Object[0];
 
     protected LoggerAdapterBase() {
+        // empty implementation; defined only to make the constructor protected
     }
 
 
@@ -282,17 +283,6 @@ public abstract class LoggerAdapterBase implements Log {
         return arg1;
     }
 
-//    @Override
-//    @SuppressWarnings("UnusedAssignment")
-//    public <T1, E extends Throwable> T1 exception(String fmt, T1 arg1, Supplier<? extends String> toStr2, E e) {
-//        StringBuilder buf = new StringBuilder();
-//        Object[] template = parser.parse(fmt);
-//        int i = 0;
-//        i = messageBuilder.append(buf, template, i, arg1);
-//        i = messageBuilder.append(buf, template, i, get(toStr2));
-//        write(buf, e);
-//        return arg1;
-//    }
 
     @Override
     @SuppressWarnings("UnusedAssignment")

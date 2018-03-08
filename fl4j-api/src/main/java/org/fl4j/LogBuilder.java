@@ -4,8 +4,10 @@ package org.fl4j;
 import java.util.*;
 
 import static java.lang.Thread.currentThread;
+import static java.util.Comparator.comparingInt;
 
 /**
+ * The builder that creates instances of {@link Log}. This is the entry point to the API.
  * Created by alexander on 2/4/18.
  */
 public class LogBuilder {
@@ -13,10 +15,13 @@ public class LogBuilder {
     private static final String FL4J_PROVIDER = "fl4j.provider";
     private String name;
     private LogLevel level = LogLevel.INFO;
-    private static LogProvider provider;  // TODO: initialize
+    private static LogProvider provider;
 
 
-    //TODO: remove this once initialization is implemented
+    /**
+     * Back door that allows setting log provider programmatically.
+     * @param provider the log provider that will be used for creating of {@link Log} instances
+     */
     public static void setLogProvider(LogProvider provider) {
         LogBuilder.provider = provider;
     }
@@ -75,12 +80,7 @@ public class LogBuilder {
                 }
             }
             if (!providers.isEmpty()) {
-                provider = Collections.min(providers, new Comparator<LogProvider>() {
-                    @Override
-                    public int compare(LogProvider p1, LogProvider p2) {
-                        return p1.getPriority() - p2.getPriority();
-                    }
-                });
+                provider = Collections.min(providers, comparingInt(LogProvider::getPriority));
 
                 if (provider instanceof EmptyLogProvider) {
                     System.out.println("No log provider is found");

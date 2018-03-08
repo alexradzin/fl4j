@@ -4,7 +4,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
+ * General log interface. Defines all methods that can be used for logging.
  * Created by alexander on 2/1/18.
+ * @author alexr
  */
 public interface Log {
     String log(String fmt, Object ... args);

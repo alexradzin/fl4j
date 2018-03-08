@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 import static org.fl4j.Getter.get;
 
 /**
+ * Implementation of {@link Log} for WARN Logback
  * Created by alexander on 2/5/18.
  */
 class WarnLog implements Log {

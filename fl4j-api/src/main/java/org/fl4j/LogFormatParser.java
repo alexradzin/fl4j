@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
+ * Implementation of {@link FormatParser} that parses format with braces (SLF4J style).
  * Created by alexander on 2/12/18.
  */
 public class LogFormatParser implements FormatParser {

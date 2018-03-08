@@ -2,8 +2,6 @@ package org.fl4j.log4j;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.message.Message;
-import org.apache.logging.log4j.message.ObjectMessage;
 import org.apache.logging.log4j.spi.ExtendedLogger;
 import org.fl4j.Log;
 
@@ -14,30 +12,19 @@ import static org.fl4j.Applier.apply;
 import static org.fl4j.Getter.get;
 
 /**
+ * Implementation of {@link Log} for LOG4J2
  * Created by alexander on 2/21/18.
  */
-public class Log4j2Adapter implements Log { //extends LoggerAdapterBase {
+class Log4j2Adapter implements Log { //extends LoggerAdapterBase {
     private final static String SELF = Log4j2Adapter.class.getName();
     private final ExtendedLogger logger;
     private final Level level;
 
-    public Log4j2Adapter(Logger logger) {
+    Log4j2Adapter(Logger logger) {
         this.logger = (ExtendedLogger)logger; // TODO: is this casting always legal?
         this.level = logger.getLevel();
     }
 
-    //@Override
-    protected <E extends Throwable> void write(CharSequence record, E e) {
-        Message m = new ObjectMessage(record);
-
-        logger.info("");
-        logger.log(level, m);
-
-        //logger
-
-        //logMessage(final String fqcn, final Level level, final Marker marker, final Message message, final Throwable t) {
-
-    }
 
     @Override
     public String log(String fmt, Object... args) {

@@ -4,8 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.fl4j.ClassAvailabilityCheckingLogProvider;
 import org.fl4j.Log;
 import org.fl4j.LogBuilder;
+import org.fl4j.LogProvider;
 
 /**
+ * Implementation of {@link LogProvider} for LOG4J2
  * Created by alexander on 2/21/18.
  */
 public class Log4j2Provider extends ClassAvailabilityCheckingLogProvider {

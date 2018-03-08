@@ -3,16 +3,15 @@ package org.fl4j.demo;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
-import org.fl4j.Formatter;
 import org.fl4j.Log;
 import org.fl4j.LogBuilder;
 import org.fl4j.LogLevel;
-import org.fl4j.log4j.Log4j2Provider;
 
-import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.logging.LogManager;
+
+import static org.fl4j.Formatter.*;
 
 
 /**
@@ -88,16 +87,16 @@ public class Demo {
         trace.log("Trace should not be visible");
 
 
-        info.log("PI={}", Math.PI, Formatter.ff(10, 2));
-        info.log("PI={}", Math.PI, Formatter.ffl(10, 2));
+        info.log("PI={}", Math.PI, ff(10, 2));
+        info.log("PI={}", Math.PI, ffl(10, 2));
 
-        info.log("number={};", 12345, Formatter.fi(20));
-        info.log("number={};", 12345, Formatter.fil(20));
-        info.log("number={};", 12345, Formatter.fi0(20));
+        info.log("number={};", 12345, fi(20));
+        info.log("number={};", 12345, fil(20));
+        info.log("number={};", 12345, fi0(20));
 
 
-        info.log("something s: {}", "hello", Formatter.fs());
-        info.log("something s(15): {}", "bye", Formatter.fs(15));
+        info.log("something s: {}", "hello", fs());
+        info.log("something s(15): {}", "bye", fs(15));
 
 
         root.info("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");

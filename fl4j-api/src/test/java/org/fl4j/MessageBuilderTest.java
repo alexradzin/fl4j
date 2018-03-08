@@ -7,6 +7,7 @@ import java.util.function.Function;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
+ * Test of {@link MessageBuilder}
  * Created by alexander on 2/13/18.
  */
 class MessageBuilderTest {
@@ -39,6 +40,22 @@ class MessageBuilderTest {
         assertEquals("Hello, world!", append1(template, 0, "world"));
     }
 
+    @Test
+    void placehodlerInTheEnd() {
+        Function<Object, String> f = String::valueOf;
+        Object[] template = new Object[] {"Hello, ", f};
+        assertEquals("Hello, world", append1(template, 0, "world"));
+    }
+
+
+//    @Test
+//    void severalPlaceholders() {
+//        Function<Object, String> f = String::valueOf;
+//        Object[] template = new Object[] {"Hello, ", f, " and ", f, "!"};
+//        append1(template, 0, "Bonnie");
+//        String result = append1(template, 1, "Clyde");
+//        assertEquals("Hello, Bonnie and Clyde!", result);
+//    }
 
     @Test
     void appendSeveralArgs() {

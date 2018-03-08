@@ -5,6 +5,7 @@ import java.util.function.Function;
 import static java.lang.String.format;
 
 /**
+ * Convenience utility class that provides functional approach to formatting of primitives.
  * Created by alexander on 2/11/18.
  */
 public class Formatter {

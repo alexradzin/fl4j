@@ -8,6 +8,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 /**
+ * Implementation of {@link LogProvider} for LOG4J
  * Created by alexander on 2/20/18.
  */
 public class Log4jProvider extends ClassAvailabilityCheckingLogProvider {

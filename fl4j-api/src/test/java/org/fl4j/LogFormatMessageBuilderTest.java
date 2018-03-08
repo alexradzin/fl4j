@@ -9,14 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * to make sure these two can work together
  * Created by alexander on 2/13/18.
  */
-public class LogFormatMessageBuilderTest {
+class LogFormatMessageBuilderTest {
+    @Test
+    void formatWithoutPlaceholders() {
+        assertEquals("Hello world", test("Hello world", 123));
+    }
+
     @Test
     void manyParts() {
         assertEquals("Hello Bill, you have 314 messages from 217 people!", test("Hello {}, you have {} messages from {} people!", "Bill", 314, 217));
     }
 
 
-    String test(String fmt, Object ... args) {
+    private String test(String fmt, Object ... args) {
         Object[] template = new LogFormatParser().parse(fmt);
         MessageBuilder mb = new MessageBuilder();
         StringBuilder buf = new StringBuilder();

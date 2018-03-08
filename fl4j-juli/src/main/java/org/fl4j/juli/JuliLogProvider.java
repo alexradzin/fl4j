@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Implementation of {@link LogProvider} for JULI - JDK loger.
  * Created by alexander on 2/12/18.
  */
 public class JuliLogProvider implements LogProvider {
