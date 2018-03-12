@@ -23,6 +23,6 @@ public class Applier {
                 return null;
             }
         }
-        return f.apply(arg);
+        return f == null ? null : f.apply(arg);
     }
 }
