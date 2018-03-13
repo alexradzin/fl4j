@@ -408,6 +408,7 @@ public abstract class LoggerAdapterBase implements Log {
         int i = 0;
         i = messageBuilder.append(buf, template, i, get(toStr1));
         i = messageBuilder.append(buf, template, i, get(toStr2));
+        write(buf, null);
     }
 
     @Override
@@ -419,6 +420,7 @@ public abstract class LoggerAdapterBase implements Log {
         i = messageBuilder.append(buf, template, i, get(toStr1));
         i = messageBuilder.append(buf, template, i, get(toStr2));
         i = messageBuilder.append(buf, template, i, get(toStr3));
+        write(buf, null);
     }
 
     @Override
