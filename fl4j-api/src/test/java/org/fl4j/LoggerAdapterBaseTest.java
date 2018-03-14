@@ -99,6 +99,22 @@ class LoggerAdapterBaseTest {
         testVoid(l -> l.exception("{} < {}", 3, () -> 4, new IllegalStateException()), "3 < 4", new IllegalStateException());
     }
 
+
+    //TODO: add more tests for log method with variable number of parameters
+    @Test
+    void testMany() {
+        LoggerAdapterBase log = spy(LoggerAdapterBase.class);
+        log.log("{}-{}-{}-{}", 1, 2, 3, 4);
+        verify(log).write(fmtThat("1-2-3-4"), exThat(null));
+    }
+
+    @Test
+    void testManyWithException() {
+        LoggerAdapterBase log = spy(LoggerAdapterBase.class);
+        log.log("{}-{}-{}", 1, 2, 3, new RuntimeException());
+        verify(log).write(fmtThat("1-2-3"), exThat(new RuntimeException()));
+    }
+
     @Test
     void isEnabled() {
         LoggerAdapterBase log = spy(LoggerAdapterBase.class);

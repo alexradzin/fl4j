@@ -42,7 +42,10 @@ public abstract class LoggerAdapterBase implements Log {
             Object arg = args[i];
             Object value = arg;
             boolean useForResult = i == 0;
-            if (i < args.length - 1) {
+            if (value instanceof Supplier) {
+                //noinspection unchecked
+                value = ((Supplier<Object>)value).get();
+            } else if (i < args.length - 1) {
                 Object next = args[i + 1];
                 if (next instanceof Function) {
                     //noinspection unchecked
@@ -50,6 +53,7 @@ public abstract class LoggerAdapterBase implements Log {
                     i++;
                 }
             }
+
             if (useForResult) {
                 result = value;
             }
