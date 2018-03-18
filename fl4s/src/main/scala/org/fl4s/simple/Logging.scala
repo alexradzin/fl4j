@@ -5,9 +5,21 @@ import org.fl4j.{Log, LogBuilder}
 
 
 trait Logging {
-  val err: Log  = LogBuilder.builder.withLevel(ERROR).build
-  val wrn: Log  = LogBuilder.builder.withLevel(WARNING).build
-  val inf: Log = LogBuilder.builder.build
-  val dbg: Log  = LogBuilder.builder.withLevel(DEBUG).build
-  val trc: Log  = LogBuilder.builder.withLevel(TRACE).build
+  def err: Log = LogBuilder.builder.withLevel(ERROR).build
+  def wrn: Log = LogBuilder.builder.withLevel(WARNING).build
+  def inf: Log = LogBuilder.builder.build
+  def dbg: Log = LogBuilder.builder.withLevel(DEBUG).build
+  def trc: Log = LogBuilder.builder.withLevel(TRACE).build
+
+
+  def logInfo(msg: => String) {
+    if (inf.isEnabled) {
+      inf.log(msg)
+    }
+  }
+
+
+  def log: org.fl4s.Log = org.fl4s.Log
+
+
 }

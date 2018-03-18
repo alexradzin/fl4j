@@ -11,5 +11,25 @@ class SimpleMixinTest extends FunSuite with MockFactory with Matchers with Loggi
   test("Use simple inf.log") {
     inf.all("Hello, log!")
   }
+
+  test("Use string replacement") {
+    val something = new Something
+    inf.log(s"info log ${something.get()}")
+    trc.log(s"info log ${something.get()}")
+    logInfo(s"info log ${something.get()}")
+
+
+    log.log("sssss", something)
+  }
+
+
+
+  class Something {
+    def get(): String = {
+      println("function was called")
+      "this is function"
+    }
+  }
+
 }
 
