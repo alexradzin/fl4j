@@ -13,7 +13,6 @@ import static org.fl4j.Getter.get;
 public abstract class LoggerAdapterBase implements Log {
     private static final LogFormatParser parser = new LogFormatParser();
     private static final MessageBuilder messageBuilder = new MessageBuilder();
-    private static final Object[] EMPTY = new Object[0];
 
     protected LoggerAdapterBase() {
         // empty implementation; defined only to make the constructor protected
@@ -21,46 +20,39 @@ public abstract class LoggerAdapterBase implements Log {
 
 
     @Override
-    public String log(String fmt, Object... arguments) {
+    public <T> T all(String fmt, Object... args) {
         StringBuilder buf = new StringBuilder();
         Object[] template = parser.parse(fmt);
 
-        Object[] args = arguments;
         Throwable t = null;
-        if (arguments.length > 0 && arguments[arguments.length - 1] instanceof Throwable) {
-            t = (Throwable)arguments[arguments.length - 1];
-            if (arguments.length == 1) {
-                args = EMPTY;
-            } else {
-                args = new Object[arguments.length - 1];
-                System.arraycopy(arguments, 0, args, 0, arguments.length - 1);
-            }
+        int last = args.length;
+        if (args.length > 0 && args[args.length - 1] instanceof Throwable) {
+            t = (Throwable) args[args.length - 1];
+            last = args.length - 1;
         }
-        Object result = null;
 
-        for (int i = 0, index = 0; i < args.length && index >= 0; i++) {
-            Object arg = args[i];
-            Object value = arg;
-            boolean useForResult = i == 0;
+        Object result = last > 1 ? args[0] : null;
+        int index = 0;
+        int i = 0;
+        if (last > 2 && args[1] instanceof Function) {
+            @SuppressWarnings("unchecked")
+            Object value = ((Function<Object, String>)args[1]).apply(args[0]);
+            index = messageBuilder.append(buf, template, index, value);
+            i = 2;
+        }
+
+        for (; i < last && index >= 0; i++) {
+            Object value = args[i];
             if (value instanceof Supplier) {
                 //noinspection unchecked
                 value = ((Supplier<Object>)value).get();
-            } else if (i < args.length - 1) {
-                Object next = args[i + 1];
-                if (next instanceof Function) {
-                    //noinspection unchecked
-                    value = ((Function<Object, String>)next).apply(arg);
-                    i++;
-                }
-            }
-
-            if (useForResult) {
-                result = value;
             }
             index = messageBuilder.append(buf, template, index, value);
         }
-        write(buf, t);
-        return result == null ? null : result instanceof String ? (String)result : result.toString();
+        write(index == 0 ? fmt : buf, t);
+        @SuppressWarnings("unchecked")
+        T typedResult =  (T)result;
+        return typedResult;
     }
 
     @Override
@@ -69,7 +61,7 @@ public abstract class LoggerAdapterBase implements Log {
     }
 
     @Override
-    public String log(String msg) {
+    public String simple(String msg) {
         write(msg, null);
         return msg;
     }

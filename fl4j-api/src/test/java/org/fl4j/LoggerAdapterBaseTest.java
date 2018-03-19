@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +24,7 @@ class LoggerAdapterBaseTest {
     @Test
     void logWithReturn() {
         List<Integer> list = asList(1, 2, 3);
-        test(l -> l.log("hello"), "hello", null, "hello");
+//        test(l -> l.log("hello"), "hello", null, "hello");
         test(l -> l.log("Hello, {}!", "world"), "Hello, world!", null, "world");
         test(l -> l.log("And the answer is {}", 42), "And the answer is 42", null, 42);
         test(l -> l.log("And the answer is {}", 42, (n) -> (n * 2)) , "And the answer is 84", null, 42);
@@ -100,20 +101,53 @@ class LoggerAdapterBaseTest {
     }
 
 
-    //TODO: add more tests for log method with variable number of parameters
+    @Test
+    void testManyWithoutArgs() {
+        test(l -> l.all("hello"), "hello", null, null);
+    }
+
     @Test
     void testMany() {
         LoggerAdapterBase log = spy(LoggerAdapterBase.class);
-        log.log("{}-{}-{}-{}", 1, 2, 3, 4);
+        log.all("{}-{}-{}-{}", 1, 2, 3, 4);
         verify(log).write(fmtThat("1-2-3-4"), exThat(null));
     }
 
     @Test
     void testManyWithException() {
         LoggerAdapterBase log = spy(LoggerAdapterBase.class);
-        log.log("{}-{}-{}", 1, 2, 3, new RuntimeException());
+        log.all("error: ", new RuntimeException());
+        verify(log).write(fmtThat("error: "), exThat(new RuntimeException()));
+    }
+
+    @Test
+    void testManyWithArgsAndException() {
+        LoggerAdapterBase log = spy(LoggerAdapterBase.class);
+        log.all("{}-{}-{}", 1, 2, 3, new RuntimeException());
         verify(log).write(fmtThat("1-2-3"), exThat(new RuntimeException()));
     }
+
+    @Test
+    void testManyWithFunction() {
+        LoggerAdapterBase log = spy(LoggerAdapterBase.class);
+        log.all("{}-{}-{}", 1, (Function<Integer, Integer>) i -> i + i, 3, 4);
+        verify(log).write(fmtThat("2-3-4"), exThat(null));
+    }
+
+    @Test
+    void testManyWithSupplier() {
+        LoggerAdapterBase log = spy(LoggerAdapterBase.class);
+        log.all("{}-{}-{}-{}", (Supplier<Integer>) () -> 12, (Supplier<Integer>) () -> 23, (Supplier<Integer>) () -> 34, (Supplier<Integer>) () -> 45);
+        verify(log).write(fmtThat("12-23-34-45"), exThat(null));
+    }
+
+    @Test
+    void testManyWithFunctionAndSupplier() {
+        LoggerAdapterBase log = spy(LoggerAdapterBase.class);
+        log.all("{}-{}-{}-{}-{}", 8, (Function<Integer, Integer>) i -> i + i, (Supplier<Integer>) () -> 12, (Supplier<Integer>) () -> 23, (Supplier<Integer>) () -> 34, (Supplier<Integer>) () -> 45);
+        verify(log).write(fmtThat("16-12-23-34-45"), exThat(null));
+    }
+
 
     @Test
     void isEnabled() {

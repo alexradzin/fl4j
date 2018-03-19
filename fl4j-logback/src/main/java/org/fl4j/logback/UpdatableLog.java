@@ -63,8 +63,9 @@ public class UpdatableLog implements Log, LoggerContextListener {
     }
 
 
-    public String log(String fmt, Object ... args) {
-        return log.log(fmt, args);
+    @Override
+    public String all(String fmt, Object ... args) {
+        return log.all(fmt, args);
     }
 
     public boolean isEnabled() {
@@ -72,8 +73,8 @@ public class UpdatableLog implements Log, LoggerContextListener {
     }
 
     @Override
-    public String log(String msg) {
-        return log.log(msg);
+    public String simple(String msg) {
+        return log.simple(msg);
     }
 
 

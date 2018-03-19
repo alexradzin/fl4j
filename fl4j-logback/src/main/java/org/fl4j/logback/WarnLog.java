@@ -12,7 +12,7 @@ import static org.fl4j.Getter.get;
  * Implementation of {@link Log} for WARN Logback
  * Created by alexander on 2/5/18.
  */
-class WarnLog implements Log {
+class WarnLog extends VarArgsSupport implements Log {
     private final Logger logger;
 
     WarnLog(Logger logger) {
@@ -20,14 +20,14 @@ class WarnLog implements Log {
     }
 
     @Override
-    public String log(String msg) {
+    public String simple(String msg) {
         logger.warn(msg);
         return msg;
     }
 
-    public String log(String fmt, Object ... args) {
-        logger.warn(fmt, args);
-        return args[0] == null ? null : args[0].toString();
+    @Override
+    public <T> T all(String fmt, Object ... args) {
+        return all(logger, fmt, args);
     }
 
     public boolean isEnabled() {

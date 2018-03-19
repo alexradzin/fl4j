@@ -12,7 +12,7 @@ import static org.fl4j.Getter.get;
  * Implementation of {@link Log} for TRACE Logback
  * Created by alexander on 2/5/18.
  */
-class TraceLog implements Log {
+class TraceLog extends VarArgsSupport implements Log {
     private final Logger logger;
 
     TraceLog(Logger logger) {
@@ -20,14 +20,14 @@ class TraceLog implements Log {
     }
 
     @Override
-    public String log(String msg) {
+    public String simple(String msg) {
         logger.trace(msg);
         return msg;
     }
 
-    public String log(String fmt, Object ... args) {
-        logger.trace(fmt, args);
-        return args[0] == null ? null : args[0].toString();
+    @Override
+    public <T> T all(String fmt, Object ... args) {
+        return all(logger, fmt, args);
     }
 
     public boolean isEnabled() {

@@ -9,7 +9,7 @@ import org.scalatest.{FunSuite, Matchers}
   */
 class SimpleMixinTest extends FunSuite with MockFactory with Matchers with Logging {
   test("Use simple inf.log") {
-    inf.log("Hello, log!")
+    inf.all("Hello, log!")
   }
 }
 

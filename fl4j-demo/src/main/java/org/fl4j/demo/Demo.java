@@ -75,16 +75,16 @@ public class Demo {
         }
 
 
-        debug.log("Debug should not be visible");
+        debug.all("Debug should not be visible");
         if (debug.isEnabled()) {
-            info.log("Debug is ebabled");
+            info.all("Debug is ebabled");
         }
         info.log("Debug {}", debug.isEnabled());
         info.log("Trace {}", trace.isEnabled());
         if (trace.isEnabled()) {
-            info.log("Trace is ebabled");
+            info.all("Trace is ebabled");
         }
-        trace.log("Trace should not be visible");
+        trace.all("Trace should not be visible");
 
 
         info.log("PI={}", Math.PI, ff(10, 2));

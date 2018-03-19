@@ -27,9 +27,10 @@ class Log4j2Adapter implements Log { //extends LoggerAdapterBase {
 
 
     @Override
-    public String log(String fmt, Object... args) {
+    public <T> T all(String fmt, Object... args) {
         logger.logIfEnabled(SELF, level, null, fmt, args);
-        return args.length > 0 && args[0] != null ? args[0].toString() : null;
+        //noinspection unchecked
+        return args.length > 0 && args[0] != null ? (T)args[0] : null;
     }
 
     @Override
@@ -38,7 +39,7 @@ class Log4j2Adapter implements Log { //extends LoggerAdapterBase {
     }
 
     @Override
-    public String log(String msg) {
+    public String simple(String msg) {
         logger.logIfEnabled(SELF, level, null, msg);
         return msg;
     }

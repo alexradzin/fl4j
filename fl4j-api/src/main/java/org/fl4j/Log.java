@@ -9,9 +9,9 @@ import java.util.function.Supplier;
  * @author alexr
  */
 public interface Log {
-    String log(String fmt, Object ... args);
+    <T> T all(String fmt, Object ... args);
     boolean isEnabled();
-    String log(String msg);
+    String simple(String msg);
     <T> T log(String fmt, T arg);
     <T> T log(String fmt, T arg, Function<? super T, ?> toStr);
 

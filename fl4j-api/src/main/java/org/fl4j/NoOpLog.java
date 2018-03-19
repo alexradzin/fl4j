@@ -8,8 +8,10 @@ import java.util.function.Supplier;
  * Created by alexander on 2/4/18.
  */
 public class NoOpLog implements Log {
-    public String log(String fmt, Object ... args) {
-        return args[0] == null ? null : args[0].toString();
+    @Override
+    public <T> T all(String fmt, Object ... args) {
+        //noinspection unchecked
+        return args[0] == null ? null : (T)args[0];
     }
 
     public boolean isEnabled() {
@@ -17,7 +19,7 @@ public class NoOpLog implements Log {
     }
 
     @Override
-    public String log(String msg) {
+    public String simple(String msg) {
         return msg;
     }
 
