@@ -11,7 +11,7 @@ public class NoOpLog implements Log {
     @Override
     public <T> T all(String fmt, Object ... args) {
         //noinspection unchecked
-        return args[0] == null ? null : (T)args[0];
+        return args.length > 0 && args[0] != null ? (T)args[0] : null;
     }
 
     public boolean isEnabled() {
