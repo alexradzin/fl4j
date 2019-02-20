@@ -87,12 +87,13 @@ public class IfPerf {
 
     public static void main(String[] args) {
         IfPerf instance = new IfPerf();
-//        instance.debug = Boolean.parseBoolean(System.getProperty("debug", "false"));
-//        //long res1 = instance.calc(10, 1_000_000_000);
-//        //long res2 = instance.calcWithIf(10, 1_000_000_000, Boolean.parseBoolean(System.getProperty("debug", "false")));
-//        long res2 = instance.calcWithIf(10, 1_000_000_000);
-//        //System.out.println("res1=" + res1);
-//        System.out.println("res2=" + res2);
+        instance.debug = Boolean.parseBoolean(System.getProperty("debug", "false"));
+        long res1 = instance.calc(10, 1_000_000_000);
+        //long res2 = instance.calcWithIf(10, 1_000_000_000, Boolean.parseBoolean(System.getProperty("debug", "false")));
+        long res2 = instance.calcWithIf(10, 1_000_000_000);
+        //System.out.println("res1=" + res1);
+        System.out.println("res1=" + res2);
+        System.out.println("res2=" + res2);
 
 
         long n = 10_000_000_000L;

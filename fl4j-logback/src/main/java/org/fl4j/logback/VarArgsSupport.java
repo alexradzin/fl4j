@@ -15,7 +15,7 @@ class VarArgsSupport {
 
     <T> T all(Logger logger, String fmt, Object ... args) {
         @SuppressWarnings("unchecked")
-        T result = args[0] == null ? null : (T)args[0];
+        T result = args.length == 0 ? null : (T)args[0];
 
         boolean shift = false;
         if (args.length > 1 && args[1] instanceof Function) {

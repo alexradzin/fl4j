@@ -55,7 +55,7 @@ public class UpdatableLog implements Log, LoggerContextListener {
     UpdatableLog(LoggerContext loggerContext, String name, LogLevel initialLevel) {
         loggerContext.addListener(this);
         logger = loggerContext.getLogger(name);
-        log = createLog(logger.isEnabledFor(logLevels.get(initialLevel)) ? initialLevel: LogLevel.NONE, logger);
+        log = createLog(logger.isEnabledFor(logLevels.get(initialLevel)) ? initialLevel : LogLevel.NONE, logger);
     }
 
     private Log createLog(LogLevel level, Logger logger) {
@@ -64,7 +64,7 @@ public class UpdatableLog implements Log, LoggerContextListener {
 
 
     @Override
-    public String all(String fmt, Object ... args) {
+    public <T> T all(String fmt, Object ... args) {
         return log.all(fmt, args);
     }
 

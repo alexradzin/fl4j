@@ -6,12 +6,13 @@ import org.fl4j.LogLevel.{DEBUG, ERROR, TRACE, WARNING}
   * Created by alexander on 3/19/18.
   */
 trait Logging extends LogDelegate {
-  private def eLogging: Log = LogBuilder.builder.withLevel(ERROR).build
-  private def wLogging: Log = LogBuilder.builder.withLevel(WARNING).build
-  private def iLogging: Log = LogBuilder.builder.build
-  private def dLogging: Log = LogBuilder.builder.withLevel(DEBUG).build
-  private def tLogging: Log = LogBuilder.builder.withLevel(TRACE).build
+  private[simple] def eLogging: Log = LogBuilder.builder.withLevel(ERROR).build
+  private[simple] def wLogging: Log = LogBuilder.builder.withLevel(WARNING).build
+  private[simple] def iLogging: Log = LogBuilder.builder.build
+  private[simple] def dLogging: Log = LogBuilder.builder.withLevel(DEBUG).build
+  private[simple] def tLogging: Log = LogBuilder.builder.withLevel(TRACE).build
 
+  val log = LogBuilder.builder().build()
 
   def logError(msg: => String) {
     log(eLogging, msg)

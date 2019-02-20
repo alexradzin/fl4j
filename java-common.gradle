@@ -37,4 +37,10 @@ dependencies {
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
 }
+
+test {
+    testLogging {
+        events 'PASSED', 'FAILED', 'SKIPPED'
+    }
+}
 }
